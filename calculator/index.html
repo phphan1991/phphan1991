@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Casio fx-115ES PLUS Emulator</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <span class="icon"></span>
+      <span class="title">fx-115ES PLUS Emulator</span>
+      <div class="window-controls">
+        <button class="wbtn" aria-label="minimize">&#x2014;</button>
+        <button class="wbtn" aria-label="maximize">&#x25A1;</button>
+        <button class="wbtn close" aria-label="close">&#x2715;</button>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="tbtn" title="Open">&#x1F4C2;</button>
+      <button class="tbtn" title="Window">&#x1F5D6;</button>
+      <button class="tbtn" title="Float">&#x21AA;</button>
+      <button class="tbtn" title="Capture">&#x1F4F7;</button>
+      <button class="tbtn" title="Grid">&#x25A6;</button>
+    </div>
+
+    <div class="calc-frame">
+      <div class="calc">
+        <div class="brand">CASIO</div>
+        <div class="model">fx-115ES <span class="plus">PLUS</span></div>
+
+        <div class="screen">
+          <div class="screen-status">
+            <span id="statShift">D</span>
+            <span id="statMode">Math</span>
+          </div>
+          <div class="screen-lines">
+            <div id="exprLine" class="expr-line"></div>
+            <div id="resultLine" class="result-line"></div>
+          </div>
+        </div>
+
+        <!-- Modifier row -->
+        <div class="row mod-row">
+          <button class="key small shift-key" data-key="SHIFT">SHIFT</button>
+          <button class="key small alpha-key" data-key="ALPHA">ALPHA</button>
+          <div class="dpad">
+            <button class="dbtn up" data-key="UP">&#9650;</button>
+            <button class="dbtn left" data-key="LEFT">&#9664;</button>
+            <button class="dbtn center"></button>
+            <button class="dbtn right" data-key="RIGHT">&#9654;</button>
+            <button class="dbtn down" data-key="DOWN">&#9660;</button>
+          </div>
+          <button class="key small mode-key" data-key="MODE">MODE</button>
+          <button class="key small on-key" data-key="ON">ON</button>
+        </div>
+
+        <!-- Function rows -->
+        <div class="row">
+          <button class="key" data-shift="SOLVE" data-key="CALC">CALC</button>
+          <button class="key" data-shift="∫dx" data-key="FRAC">a<sup>b</sup>/<sub>c</sub></button>
+          <button class="key" data-shift="" data-key="EMPTY1"></button>
+          <button class="key" data-shift="" data-key="INV">x<sup>-1</sup></button>
+          <button class="key" data-shift="" data-key="LOGAB">log□</button>
+        </div>
+
+        <div class="row">
+          <button class="key" data-shift="%" data-key="SQRT">&radic;□</button>
+          <button class="key" data-shift="3√" data-key="SQUARE">x<sup>2</sup></button>
+          <button class="key" data-shift="x√" data-key="POW">x<sup>■</sup></button>
+          <button class="key" data-shift="10^" data-key="LOG">log</button>
+          <button class="key" data-shift="e^" data-key="LN">ln</button>
+        </div>
+
+        <div class="row">
+          <button class="key" data-shift="o,'" data-key="NEG">(-)</button>
+          <button class="key" data-shift="hyp" data-key="HYP">hyp</button>
+          <button class="key" data-shift="sin⁻¹" data-key="SIN">sin</button>
+          <button class="key" data-shift="cos⁻¹" data-key="COS">cos</button>
+          <button class="key" data-shift="tan⁻¹" data-key="TAN">tan</button>
+        </div>
+
+        <div class="row">
+          <button class="key" data-shift="STO" data-key="RCL">RCL</button>
+          <button class="key" data-shift="←" data-key="ENG">ENG</button>
+          <button class="key" data-shift="" data-key="LPAREN">(</button>
+          <button class="key" data-shift="" data-key="RPAREN">)</button>
+          <button class="key" data-shift="←→" data-key="SD">S↔D</button>
+          <button class="key" data-shift="M-" data-key="MPLUS">M+</button>
+        </div>
+
+        <!-- Numpad / right block -->
+        <div class="row">
+          <button class="key num" data-shift="CONST" data-key="7">7</button>
+          <button class="key num" data-shift="CONV" data-key="8">8</button>
+          <button class="key num" data-shift="CLR" data-key="9">9</button>
+          <button class="key warn" data-shift="INS" data-key="DEL">DEL</button>
+          <button class="key warn" data-shift="OFF" data-key="AC">AC</button>
+        </div>
+
+        <div class="row">
+          <button class="key num" data-shift="MATRIX" data-key="4">4</button>
+          <button class="key num" data-shift="VECTOR" data-key="5">5</button>
+          <button class="key num" data-shift="VERIFY" data-key="6">6</button>
+          <button class="key" data-shift="nPr" data-key="MUL">&times;</button>
+          <button class="key" data-shift="nCr" data-key="DIV">&divide;</button>
+        </div>
+
+        <div class="row">
+          <button class="key num" data-shift="STAT" data-key="1">1</button>
+          <button class="key num" data-shift="CMPLX" data-key="2">2</button>
+          <button class="key num" data-shift="BASE" data-key="3">3</button>
+          <button class="key" data-shift="Pol" data-key="PLUS">+</button>
+          <button class="key" data-shift="Rec" data-key="MINUS">&minus;</button>
+        </div>
+
+        <div class="row">
+          <button class="key num" data-shift="Rnd" data-key="0">0</button>
+          <button class="key num" data-shift="Ran#" data-key="DOT">.</button>
+          <button class="key" data-shift="π" data-key="EXP">&times;10<sup>x</sup></button>
+          <button class="key" data-shift="DRG" data-key="ANS">Ans</button>
+          <button class="key equals" data-shift="" data-key="EQ">=</button>
+        </div>
+
+        <div class="footer">
+          <div class="badge">NATURAL-V.P.A.M.</div>
+          <div class="tag">TWO WAY POWER</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hint">
+    Tip: Use the keyboard. <kbd>0-9</kbd>, <kbd>+ - * /</kbd>, <kbd>(</kbd> <kbd>)</kbd>, <kbd>Enter</kbd>=, <kbd>Backspace</kbd>=DEL, <kbd>Esc</kbd>=AC, <kbd>s</kbd>=SHIFT.
+  </p>
+
+  <script src="calculator.js"></script>
+</body>
+</html>
