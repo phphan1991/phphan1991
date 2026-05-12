@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HeavyBid-style Cost Estimate Tool</title>
+  <meta name="viewport" content="width=1200" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Toolbar (hidden when printing) -->
+  <div class="toolbar">
+    <span class="brand">Cost Estimate Tool</span>
+    <span class="muted">HeavyBid-style report builder</span>
+    <span class="spacer"></span>
+    <button id="btnLoadDemo">Load Seepage Wier Demo</button>
+    <button id="btnAddActivity" class="primary">+ Add Activity</button>
+    <button id="btnPrint">Print / PDF</button>
+    <button id="btnExport">Export JSON</button>
+    <button id="btnImport">Import JSON</button>
+    <button id="btnClear" class="danger">Clear</button>
+    <input type="file" id="fileImport" accept="application/json" style="display:none" />
+  </div>
+
+  <!-- The paper "report" -->
+  <div class="report" id="report">
+
+    <!-- Top header block (editable) -->
+    <header class="report-header">
+      <div class="left">
+        <div><input class="h-input" id="hCompany" value="FCI Constructors" /></div>
+        <div><input class="h-input" id="hJob"     value="21322008-FA6" /> <input class="h-input" id="hProject" value="ADTP Changes 2026 FA" /></div>
+        <div><input class="h-input" id="hEstimator" value="Jacob Orbacedo" /></div>
+      </div>
+      <div class="center">
+        <div class="report-title">
+          Cost for Item <input class="h-input short" id="hItem" value="51505" style="font-weight:bold;text-align:center" />
+        </div>
+      </div>
+      <div class="right">
+        <div>Page <input class="h-input short" id="hPage" value="1" style="text-align:right;width:30px" /></div>
+        <div><input class="h-input short" id="hDate" value="08/13/2025" style="width:90px;text-align:right" />
+             <input class="h-input short" id="hTime" value="14:00" style="width:50px;text-align:right" /></div>
+      </div>
+    </header>
+
+    <!-- Column header strip -->
+    <div class="col-header">
+      <div class="c1 stack">
+        <div>Activity</div>
+        <div class="small">Resource</div>
+      </div>
+      <div class="c2 stack">
+        <div>Desc</div>
+      </div>
+      <div class="stack"><div>&nbsp;</div><div class="small">Pcs</div></div>
+      <div class="c4 stack">
+        <div>Quantity</div>
+        <div class="small">Unit</div>
+      </div>
+      <div></div>
+      <div class="stack"><div>Unit</div><div class="small">Cost</div></div>
+      <div class="stack"><div>Perm</div><div class="small">Labor</div></div>
+      <div class="stack"><div>&nbsp;</div><div class="small">Material</div></div>
+      <div class="stack"><div>Constr</div><div class="small">Matl/Exp</div></div>
+      <div class="stack"><div>Equip</div><div class="small">Ment</div></div>
+      <div class="stack"><div>Sub-</div><div class="small">Contract</div></div>
+      <div class="stack"><div>&nbsp;</div><div class="small">Total</div></div>
+      <div></div>
+    </div>
+
+    <!-- Bid item header block (editable) -->
+    <div class="bid-item-block" id="bidItemBlock">
+      <div><label>BID ITEM&nbsp;=</label></div>
+      <div><input class="h-input" id="bItem" value="51505" /></div>
+      <div class="meta">
+        <span>Land Item</span>
+        <span>SCHEDULE:</span><input class="h-input short" id="bSchedule" value="1" style="width:30px" />
+        <input class="h-input short" id="bLandItem" value="100" style="width:40px" />
+        <span></span>
+        <span>Engr Quan:</span><input class="h-input short" id="bEngrQuan" value="1.000" style="width:60px;text-align:right" />
+        <span></span>
+        <input class="h-input short" id="bInitials" value="JWE" style="width:50px;text-align:right" />
+      </div>
+      <div><label>Description&nbsp;=</label></div>
+      <div><input class="h-input" id="bDesc" value="Seepage Wier Basin" /></div>
+      <div class="meta">
+        <span>Unit =</span><input class="h-input short" id="bUnit" value="LS" style="width:40px" />
+        <span>Takeoff Quan:</span><input class="h-input short" id="bTakeoffQuan" value="1.000" style="width:60px;text-align:right" />
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <!-- Activities are rendered here -->
+    <div id="activities"></div>
+
+    <!-- Report grand totals -->
+    <div class="report-totals" id="reportTotals">
+      <div class="report-totals-line">
+        <div class="title" id="rtTitle">$0.00 &nbsp;&nbsp; *** Report Totals ***</div>
+        <div class="lab" id="rtLab">0</div>
+        <div class="mat" id="rtMat">0</div>
+        <div class="ce"  id="rtCE">0</div>
+        <div class="eq"  id="rtEq">0</div>
+        <div class="sub" id="rtSub">0</div>
+        <div class="tot" id="rtTot">0</div>
+      </div>
+    </div>
+
+    <div class="report-notes">
+      <h4>Report Notes:</h4>
+      <div>The estimate was prepared with TAKEOFF Quantities.</div>
+      <div>This report shows TAKEOFF Quantities with the resources.</div>
+      <div class="muted" style="margin-top:6px">
+        Tip: Click any field to edit. Use the dropdowns to swap resources, then enter Pcs &amp; Quantity — totals recalc automatically.
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

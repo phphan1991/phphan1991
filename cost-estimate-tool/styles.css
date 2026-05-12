@@ -1,0 +1,295 @@
+/* ---------- Page & general ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #d5d8de; color: #111; }
+body { font-family: "Times New Roman", Times, serif; font-size: 12px; }
+
+/* The "paper" that wraps the report */
+.report {
+  max-width: 1180px;
+  margin: 16px auto;
+  padding: 28px 36px 40px;
+  background: #fff;
+  border: 1px solid #b9bcc4;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+/* ---------- Toolbar (not part of the printed report) ---------- */
+.toolbar {
+  max-width: 1180px;
+  margin: 16px auto 0;
+  padding: 10px 12px;
+  background: #2b3950;
+  color: #f7f8fa;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+.toolbar .spacer { flex: 1; }
+.toolbar button {
+  background: #4d6285;
+  color: #fff;
+  border: 1px solid #6a7fa3;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.toolbar button:hover { background: #5e76a0; }
+.toolbar button.primary { background: #2f7d4f; border-color: #46a06b; }
+.toolbar button.primary:hover { background: #379059; }
+.toolbar button.danger  { background: #8a3a3a; border-color: #b25555; }
+.toolbar button.danger:hover  { background: #a04545; }
+.toolbar .brand { font-weight: 600; letter-spacing: .3px; }
+
+/* ---------- Report header (top banner like HeavyBid printout) ---------- */
+.report-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+}
+.report-header .center { text-align: center; }
+.report-header .right  { text-align: right; }
+.report-header input { font-family: inherit; font-size: 12px; }
+.report-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  margin: 2px 0 14px;
+}
+
+/* ---------- Column header strip ---------- */
+.col-header,
+.activity-banner,
+.crew-line,
+.resource-line,
+.activity-total-line,
+.report-totals-line {
+  display: grid;
+  grid-template-columns:
+    110px   /* Activity / Resource */
+    230px   /* Description */
+     46px   /* Pcs */
+     66px   /* Quantity */
+     38px   /* Unit */
+     82px   /* Unit Cost */
+     78px   /* Perm Labor */
+     78px   /* Material */
+     78px   /* Constr Matl/Exp */
+     78px   /* Equip Ment */
+     78px   /* Sub-Contract */
+     90px   /* Total */
+     28px;  /* Row action */
+  align-items: center;
+  column-gap: 4px;
+}
+
+.col-header {
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 4px 0 2px;
+  text-align: right;
+}
+.col-header .c1, .col-header .c2 { text-align: left; }
+.col-header .c1 div + div, .col-header .c4 div + div { font-weight: normal; font-style: normal; }
+.col-header .stack { line-height: 1.15; }
+.col-header .small { font-weight: normal; font-size: 10.5px; }
+
+/* ---------- Bid item header block ---------- */
+.bid-item-block {
+  display: grid;
+  grid-template-columns: 110px 230px 1fr;
+  column-gap: 12px;
+  margin: 12px 0 10px;
+  padding: 6px 0;
+  font-size: 12px;
+}
+.bid-item-block .row { display: contents; }
+.bid-item-block label { font-weight: bold; }
+.bid-item-block .meta {
+  grid-column: 3;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto;
+  column-gap: 8px;
+  align-items: center;
+}
+.bid-item-block input { width: 100%; }
+
+/* ---------- Activity banner (gray strip) ---------- */
+.activity-banner {
+  background: #d9dadf;
+  border-top: 1px solid #767880;
+  border-bottom: 1px solid #767880;
+  padding: 4px 4px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.activity-banner .code  { grid-column: 1; }
+.activity-banner .desc  { grid-column: 2 / span 3; }
+.activity-banner .quan-label { grid-column: 5 / span 1; text-align: right; padding-right: 4px; font-weight: normal; }
+.activity-banner .quan  { grid-column: 6 / span 1; text-align: right; }
+.activity-banner .meta1 { grid-column: 7 / span 4; text-align: right; font-weight: normal; font-size: 11px; }
+.activity-banner .meta2 { grid-column: 11 / span 2; text-align: right; font-weight: normal; font-size: 11px; }
+.activity-banner .actions { grid-column: 13; text-align: right; }
+
+.activity-banner .inline-input  { background: transparent; border: 0; border-bottom: 1px dotted #767880; width: 95%; }
+.activity-banner .inline-input:focus { background: #fff; border-bottom-color: #2b3950; outline: none; }
+
+/* ---------- Crew line under each activity banner ---------- */
+.crew-line {
+  padding: 2px 0;
+  font-size: 11.5px;
+  border-bottom: 1px dotted #ccc;
+}
+.crew-line .label { grid-column: 1; text-decoration: underline; }
+.crew-line .name  { grid-column: 2; }
+.crew-line .ch    { grid-column: 4 / span 2; text-align: right; }
+.crew-line .prod  { grid-column: 6 / span 3; text-align: right; }
+.crew-line .pcs   { grid-column: 9 / span 4; text-align: right; }
+
+/* ---------- Resource line ---------- */
+.resource-line {
+  padding: 1px 0;
+  font-size: 12px;
+}
+.resource-line:hover { background: #f6f8fb; }
+.resource-line .code  { grid-column: 1; }
+.resource-line .desc  { grid-column: 2; }
+.resource-line .pcs   { grid-column: 3; }
+.resource-line .qty   { grid-column: 4; }
+.resource-line .unit  { grid-column: 5; }
+.resource-line .uc    { grid-column: 6; text-align: right; }
+.resource-line .lab   { grid-column: 7; text-align: right; }
+.resource-line .mat   { grid-column: 8; text-align: right; }
+.resource-line .ce    { grid-column: 9; text-align: right; }
+.resource-line .eq    { grid-column: 10; text-align: right; }
+.resource-line .sub   { grid-column: 11; text-align: right; }
+.resource-line .tot   { grid-column: 12; text-align: right; font-weight: 600; }
+.resource-line .del   { grid-column: 13; text-align: right; }
+
+.resource-line select,
+.resource-line input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 12px;
+  background: #fdfdfd;
+  border: 1px solid #cfd2da;
+  padding: 1px 3px;
+}
+.resource-line select:focus,
+.resource-line input:focus {
+  background: #fff;
+  border-color: #2b6ea8;
+  outline: none;
+}
+.resource-line input[readonly] {
+  background: transparent;
+  border: 0;
+  text-align: right;
+}
+.resource-line input.txt { text-align: left; }
+.resource-line input.num { text-align: right; }
+
+.resource-line .del button {
+  background: transparent;
+  border: 0;
+  color: #a33;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+.resource-line .del button:hover { color: #d11; }
+
+.add-resource-row {
+  padding: 4px 0 8px;
+  border-bottom: 1px solid #555;
+}
+.add-resource-row button {
+  background: #eef1f6;
+  border: 1px dashed #8893a5;
+  color: #2b3950;
+  font-size: 11px;
+  padding: 3px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.add-resource-row button:hover { background: #e2e7f0; }
+
+/* ---------- Activity totals ---------- */
+.activity-total-line {
+  padding: 4px 0 8px;
+  border-bottom: 1px solid #555;
+  font-weight: 600;
+}
+.activity-total-line .grand { grid-column: 1 / span 2; font-weight: bold; }
+.activity-total-line .mh    { grid-column: 3 / span 3; text-align: right; font-weight: normal; font-style: italic; }
+.activity-total-line .uc    { grid-column: 6; text-align: right; font-style: italic; color: #555; }
+.activity-total-line .lab   { grid-column: 7;  text-align: right; }
+.activity-total-line .mat   { grid-column: 8;  text-align: right; }
+.activity-total-line .ce    { grid-column: 9;  text-align: right; }
+.activity-total-line .eq    { grid-column: 10; text-align: right; }
+.activity-total-line .sub   { grid-column: 11; text-align: right; }
+.activity-total-line .tot   { grid-column: 12; text-align: right; }
+
+/* ---------- Report totals ---------- */
+.report-totals {
+  margin-top: 20px;
+  border-top: 2px solid #111;
+  padding-top: 8px;
+}
+.report-totals-line {
+  font-weight: bold;
+  padding: 4px 0;
+  border-bottom: 2px solid #111;
+}
+.report-totals-line .title { grid-column: 1 / span 5; }
+.report-totals-line .lab   { grid-column: 7;  text-align: right; }
+.report-totals-line .mat   { grid-column: 8;  text-align: right; }
+.report-totals-line .ce    { grid-column: 9;  text-align: right; }
+.report-totals-line .eq    { grid-column: 10; text-align: right; }
+.report-totals-line .sub   { grid-column: 11; text-align: right; }
+.report-totals-line .tot   { grid-column: 12; text-align: right; }
+
+/* ---------- Reusable inputs in editable header ---------- */
+.h-input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dotted #aaa;
+  font: inherit;
+  width: 100%;
+}
+.h-input.short { width: 80px; }
+.h-input:focus { background: #fff8d8; border-bottom-color: #2b3950; outline: none; }
+
+/* ---------- Footer / notes ---------- */
+.report-notes {
+  margin-top: 18px;
+  font-size: 11px;
+  border-top: 1px solid #aaa;
+  padding-top: 6px;
+  color: #333;
+}
+.report-notes h4 { margin: 0 0 4px; font-size: 11px; }
+
+/* ---------- Print ---------- */
+@media print {
+  body { background: #fff; }
+  .toolbar { display: none; }
+  .report { box-shadow: none; border: 0; max-width: none; margin: 0; padding: 12px 18px; }
+  .resource-line .del,
+  .add-resource-row,
+  .activity-banner .actions { display: none !important; }
+  input, select { border: 0 !important; background: transparent !important; }
+  .resource-line:hover { background: transparent; }
+}
+
+/* ---------- Small helpers ---------- */
+.muted { color: #666; }
+.right { text-align: right; }
+.nowrap { white-space: nowrap; }
