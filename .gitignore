@@ -1,0 +1,12 @@
+# Project-confidential work — keep OUT of this public profile repo
+change_orders/
+adtp_pipeline/data/
+adtp_pipeline/outputs/
+adtp_pipeline/.venv/
+
+# Python clutter
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
